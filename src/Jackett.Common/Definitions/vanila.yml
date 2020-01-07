@@ -1357,8 +1357,6 @@
       title:
         selector: a.topictitle
         filters:
-          - name: re_replace
-            args: ["[\\:\\-\\/\\|]", " "]
           - name: replace
             args: ["Кураж-Бамбей", "kurazh"]
           - name: replace
@@ -1375,6 +1373,10 @@
             args: ["селезень", "selezen"]
           - name: re_replace
             args: ["(\\([А-Яа-яЁё\\W]+\\))|(^[А-Яа-яЁё\\W\\d]+\\/ )|([а-яА-ЯЁё \\-]+,+)|([а-яА-ЯЁё]+)", "{{ if .Config.striprussian }}{{ else }}$1$2$3$4{{ end }}"]
+          - name: re_replace
+            args: ["[\\:\\-\\/\\|\\[\\]]", " "]
+          - name: append
+            args: " - rus"
           - name: replace
             args: [" Rip", "Rip"]
           - name: replace
