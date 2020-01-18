@@ -1388,6 +1388,9 @@
       details:
         selector: a.topictitle
         attribute: href
+        filters:
+          - name: re_replace
+            args: ["(.*)&hilit=.*", "$1"]
       category:
         selector: a[href^="./viewforum.php?f="]
         attribute: href
