@@ -1334,6 +1334,7 @@
 
   download:
     selector: a[href^="https://dl.vanila.org"]
+    attribute: href
     filters:
       - name: re_replace
         args: [".*&u=(.*)", "$1"]
