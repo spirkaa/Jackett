@@ -25,6 +25,10 @@
       search: [q]
 
   settings:
+    - name: striprussian
+      type: checkbox
+      label: Strip Russian Letters
+      default: false
     - name: adverts
       type: select
       label: Include Advertising
@@ -61,6 +65,35 @@
             args: tmp
       title:
         selector: a[href^="details.php?id="]
+        filters:
+          - name: replace
+            args: ["Кураж-Бамбей", "kurazh"]
+          - name: replace
+            args: ["Кубик в Кубе", "Kubik"]
+          - name: replace
+            args: ["Кравец", "Kravec"]
+          - name: replace
+            args: ["Пифагор", "Pifagor"]
+          - name: replace
+            args: ["Невафильм", "Nevafilm"]
+          - name: replace
+            args: ["Лицензия", "Lic"]
+          - name: replace
+            args: ["селезень", "selezen"]
+          - name: re_replace
+            args: ["(\\([А-Яа-яЁё\\W]+\\))|(^[А-Яа-яЁё\\W\\d]+\\/ )|([а-яА-ЯЁё \\-]+,+)|([а-яА-ЯЁё]+)", "{{ if .Config.striprussian }}{{ else }}$1$2$3$4{{ end }}"]
+          - name: re_replace
+            args: ["[\\:\\-\\/\\|\\[\\]]", " "]
+          - name: append
+            args: " - rus"
+          - name: replace
+            args: [" Rip", "Rip"]
+          - name: replace
+            args: ["WEB DL", "WEBDL"]
+          - name: replace
+            args: ["WEBDLRip", "WEBDL"]
+          - name: replace
+            args: ["HDTVRip", "HDTV"]
       details:
         selector: a[href^="details.php?id="]
         attribute: href
